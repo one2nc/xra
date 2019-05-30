@@ -1,29 +1,15 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"net"
 	"sync"
 	"time"
 )
 
-type Client struct {
-	CheckConnect map[string]map[string][]int32 `json:"check_connect"`
-}
-
-func runClient(j []byte) {
-	x := map[string]PortMap{}
-	if err := json.Unmarshal(j, &x); err != nil {
-		panic(err)
-	} else {
-		clientDo(x)
-	}
-}
-
 var wg sync.WaitGroup
 
-func clientDo(hosts map[string]PortMap) {
+func runClient(hosts map[string]PortMap) {
 	for h, p := range hosts {
 		for proto, ports := range p {
 			for _, port := range ports {

@@ -22,9 +22,14 @@ var (
 	host   = flag.String("host", hostname(), "Hostname or IP")
 )
 
+type PortConf struct {
+	AllowTCP []int `json:"allow_tcp"`
+	AllowUDP []int `json:"allow_udp"`
+}
+
 type MasterConfig struct {
-	Zones   map[string][]string                      `json:"zones"`
-	Network map[string]map[string]map[string][]int64 `json:"network"`
+	Zones   map[string][]string            `json:"zones"`
+	Network map[string]map[string]PortConf `json:"network"`
 }
 
 func main() {

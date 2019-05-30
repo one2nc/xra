@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net"
@@ -11,10 +10,6 @@ import (
 )
 
 type PortMap map[string][]int
-
-type Server struct {
-	PortMap PortMap `json:"port_map"`
-}
 
 func sendTcpResponse(conn net.Conn) {
 	buf := make([]byte, 1024)
@@ -72,8 +67,8 @@ func udpListen(port int) {
 	}
 }
 
-func server(p PortMap) {
-	for proto, ports := range p {
+func server(p *PortMap) {
+	for proto, ports := range *p {
 		for _, port := range ports {
 			log.Printf("Trying to listen on %v Port: %v", proto, port)
 			if proto == "tcp" {
@@ -98,12 +93,7 @@ func waitForSignal() {
 	log.Println("Exiting")
 }
 
-func runServer(j []byte) {
-	x := PortMap{}
-	if err := json.Unmarshal(j, &x); err != nil {
-		panic(err)
-	} else {
-		server(x)
-		waitForSignal()
-	}
+func runServer(x *PortMap) {
+	server(x)
+	waitForSignal()
 }
