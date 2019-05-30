@@ -5,4 +5,4 @@ xra_linux:
 		-o xra -a -installsuffix cgo .
 
 test:
-	echo "test"
+	go test -v ./...

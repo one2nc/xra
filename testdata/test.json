@@ -1,0 +1,63 @@
+{
+    "network": {
+        "simba": {
+            "public_internet": {
+                "deny_tcp": [
+                    53
+                ]
+            },
+            "simba": {
+                "allow_tcp": [
+                    22
+                ],
+                "deny_tcp": [
+                    123
+                ]
+            },
+            "trust": {
+                "deny_tcp": [
+                    22
+                ]
+            }
+        },
+        "trust": {
+            "public_internet": {
+                "deny_tcp": [
+                    53
+                ]
+            },
+            "simba": {
+                "deny_tcp": [
+                    22
+                ]
+            },
+            "trust": {
+                "allow_tcp": [
+                    5000
+                ],
+                "allow_udp": [
+                    6000,
+                    6001
+                ],
+                "deny_tcp": [
+                    5011
+                ],
+                "deny_udp": [
+                    6011
+                ]
+            }
+        }
+    },
+    "zones": {
+        "public_internet": [
+            "8.8.8.8"
+        ],
+        "simba": [
+            "13.10.12.15"
+        ],
+        "trust": [
+            "10.10.10.1",
+            "10.10.10.2"
+        ]
+    }
+}
