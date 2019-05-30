@@ -1,12 +1,49 @@
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+# Ignore all
+*
 
-# Test binary, build with `go test -c`
-*.test
+# Unignore all with extensions
+!*.*
 
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
+# Unignore all Makefile
+!*Makefile
+!*Dockerfile
+
+# Unignore all dirs
+!*/
+
+# Ignore certain extensions.
+*.tgz
+*.rpm
+*.zip
+*.pem
+*.retry
+
+# Ignore folders.
+.idea
+*.iml
+pkg*
+bin*
+*vendor*
+dist/
+*dist*
+telco_ops/services/nomad_jobs/consul_seed
+
+# Ignore pyc files
+*.pyc
+__pycache__
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
+
+public
+themes
+
+# Omit srehub docs
+docs/srehub/docs
