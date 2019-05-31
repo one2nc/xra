@@ -17,6 +17,7 @@ func hostname() string {
 }
 
 var (
+	debug  = flag.Bool("debug", false, "Run in debug mode?")
 	client = flag.Bool("client", false, "Run in client mode?")
 	config = flag.String("config", "/tmp/goss.json", "Path to Json")
 	host   = flag.String("host", hostname(), "Hostname or IP")
@@ -47,9 +48,17 @@ func main() {
 	}
 
 	if *client {
-		runClient(spitClientConfig(&mConfig, *host))
+		c := spitClientConfig(&mConfig, *host)
+		if *debug {
+			log.Printf("%+v\n", c)
+		}
+		runClient(c)
 		return
 	}
 
-	runServer(spitServerConfig(&mConfig, *host))
+	c := spitServerConfig(&mConfig, *host)
+	if *debug {
+		log.Printf("%+v\n", c)
+	}
+	runServer(c)
 }
