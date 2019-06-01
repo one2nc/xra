@@ -4,7 +4,8 @@ DEP := $(shell command -v dep 2> /dev/null)
 
 deps:
 ifndef DEP
-	$(error "dep command not found")
+	dep version || (curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh)
+	dep ensure -v
 endif
 	dep ensure -v
 
