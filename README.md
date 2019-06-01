@@ -1,5 +1,22 @@
 # xra
 
+## Usage
+
+```
+(srehubenv) meson10@xps:$xra$ ./xra --help
+Usage of ./xra:
+  -client
+    	Run in client mode?
+  -config string
+    	Path to Json (default "/tmp/goss.json")
+  -debug
+    	Run in debug mode?
+  -host string
+    	Hostname or IP (default "xps")
+  -nmap
+    	Nmap scan? [Required sudo]
+```
+
 ## Server
 
 ```

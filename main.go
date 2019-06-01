@@ -17,10 +17,11 @@ func hostname() string {
 }
 
 var (
-	debug  = flag.Bool("debug", false, "Run in debug mode?")
-	client = flag.Bool("client", false, "Run in client mode?")
-	config = flag.String("config", "/tmp/goss.json", "Path to Json")
-	host   = flag.String("host", hostname(), "Hostname or IP")
+	debug    = flag.Bool("debug", false, "Run in debug mode?")
+	use_nmap = flag.Bool("nmap", false, "Nmap scan? [Required sudo]")
+	client   = flag.Bool("client", false, "Run in client mode?")
+	config   = flag.String("config", "/tmp/goss.json", "Path to Json")
+	host     = flag.String("host", hostname(), "Hostname or IP")
 )
 
 type PortConf struct {
@@ -52,7 +53,11 @@ func main() {
 		if *debug {
 			log.Printf("%+v\n", c)
 		}
-		runClient(c)
+		if *use_nmap {
+			runNmapClient(c)
+		} else {
+			runClient(c)
+		}
 		return
 	}
 
