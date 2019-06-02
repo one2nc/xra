@@ -4,7 +4,7 @@ DEP := $(shell command -v dep 2> /dev/null)
 
 deps:
 ifndef DEP
-	$(error "dep command not found")
+	go get -u github.com/golang/dep/cmd/dep
 endif
 	dep ensure -v
 
