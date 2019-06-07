@@ -9,8 +9,8 @@ endif
 	dep ensure -v
 
 xra_linux: deps
-	env GOOS=linux GARCH=amd64 CGO_ENABLED=0 GOCACHE=/tmp/gocache go build \
-		-o xra -a -installsuffix cgo .
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
+							-a -ldflags '-w -extldflags "-static"' .
 
 test: deps
 	go test -v ./...
