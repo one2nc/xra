@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func getZone(c *MasterConfig, ip string) string {
 	for z, ips := range c.Zones {
 		for _, _ip := range ips {
@@ -29,6 +31,9 @@ func spitServerConfig(c *MasterConfig, ip string) *PortMap {
 			for _, p := range conf.AllowUDP {
 				portMap["udp"] = append(portMap["udp"], p)
 			}
+			for _, p := range conf.ThroughputTest {
+				portMap["throughputTest"] = append(portMap["throughputTest"], p)
+			}
 		}
 	}
 
@@ -40,8 +45,9 @@ func spitClientConfig(c *MasterConfig, ip string) map[string]PortMap {
 
 	portMap := map[string]PortMap{}
 
+	fmt.Printf("\nZone is %v", zone)
 	for target, conf := range c.Network[zone] {
-		pm := PortMap{"tcp": conf.AllowTCP, "udp": conf.AllowUDP}
+		pm := PortMap{"tcp": conf.AllowTCP, "udp": conf.AllowUDP, "throughputTest": conf.ThroughputTest}
 
 		for _, _ip := range c.Zones[target] {
 			if _ip == ip {
@@ -53,4 +59,5 @@ func spitClientConfig(c *MasterConfig, ip string) map[string]PortMap {
 	}
 
 	return portMap
+
 }
